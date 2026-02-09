@@ -36,7 +36,7 @@ gcloud run jobs create ${JOB_NAME} \
     --region ${REGION} \
     --service-account ${SERVICE_ACCOUNT_NAME}@${PROJECT_ID}.iam.gserviceaccount.com \
     --set-cloudsql-instances ${CONNECTION_NAME} \
-    --set-env-vars="DJANGO_SETTINGS_MODULE=adveralabs.settings,USE_CLOUD_SQL=True" \
+    --set-env-vars="DJANGO_SETTINGS_MODULE=adveralabs.settings,USE_CLOUD_SQL=True,DB_NAME=adveralabs_db,DB_USER=adveralabs_user,DB_HOST=/cloudsql/${CONNECTION_NAME}" \
     --set-secrets="DB_PASSWORD=db-password:latest" \
     --memory 512Mi \
     --cpu 1 \
@@ -49,7 +49,7 @@ gcloud run jobs create ${JOB_NAME} \
         --image ${IMAGE_NAME}:latest \
         --region ${REGION} \
         --set-cloudsql-instances ${CONNECTION_NAME} \
-        --update-env-vars="DJANGO_SETTINGS_MODULE=adveralabs.settings,USE_CLOUD_SQL=True" \
+        --update-env-vars="DJANGO_SETTINGS_MODULE=adveralabs.settings,USE_CLOUD_SQL=True,DB_NAME=adveralabs_db,DB_USER=adveralabs_user,DB_HOST=/cloudsql/${CONNECTION_NAME}" \
         --update-secrets="DB_PASSWORD=db-password:latest" \
         --task-timeout 600)
 

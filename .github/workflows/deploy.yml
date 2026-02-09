@@ -96,14 +96,15 @@ jobs:
         run: |
           IMAGE_NAME="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.APP_NAME }}"
           JOB_NAME="${{ env.APP_NAME }}-migrate"
+          CONNECTION_NAME="${{ steps.get-connection.outputs.connection_name }}"
           
-          # Create or update migration job
+          # Create or update migration job with all required environment variables
           gcloud run jobs create ${JOB_NAME} \
             --image ${IMAGE_NAME}:${{ github.sha }} \
             --region ${{ env.REGION }} \
             --service-account ${{ env.SERVICE_ACCOUNT }}@${{ env.PROJECT_ID }}.iam.gserviceaccount.com \
-            --set-cloudsql-instances ${{ steps.get-connection.outputs.connection_name }} \
-            --set-env-vars="USE_CLOUD_SQL=True,DJANGO_SETTINGS_MODULE=adveralabs.settings" \
+            --set-cloudsql-instances ${CONNECTION_NAME} \
+            --set-env-vars="USE_CLOUD_SQL=True,DJANGO_SETTINGS_MODULE=adveralabs.settings,DB_NAME=adveralabs_db,DB_USER=adveralabs_user,DB_HOST=/cloudsql/${CONNECTION_NAME}" \
             --set-secrets="DB_PASSWORD=db-password:latest" \
             --memory 512Mi \
             --cpu 1 \
@@ -114,13 +115,24 @@ jobs:
           gcloud run jobs update ${JOB_NAME} \
             --image ${IMAGE_NAME}:${{ github.sha }} \
             --region ${{ env.REGION }} \
-            --set-cloudsql-instances ${{ steps.get-connection.outputs.connection_name }} \
-            --update-env-vars="USE_CLOUD_SQL=True,DJANGO_SETTINGS_MODULE=adveralabs.settings" \
+            --set-cloudsql-instances ${CONNECTION_NAME} \
+            --update-env-vars="USE_CLOUD_SQL=True,DJANGO_SETTINGS_MODULE=adveralabs.settings,DB_NAME=adveralabs_db,DB_USER=adveralabs_user,DB_HOST=/cloudsql/${CONNECTION_NAME}" \
             --update-secrets="DB_PASSWORD=db-password:latest" \
             --task-timeout 600
           
-          # Execute migration job
-          gcloud run jobs execute ${JOB_NAME} --region ${{ env.REGION }} --wait
+          # Execute migration job and capture output
+          echo "Executing migration job..."
+          gcloud run jobs execute ${JOB_NAME} --region ${{ env.REGION }} --wait || {
+            echo "Migration job failed. Getting execution logs..."
+            EXECUTION_NAME=$(gcloud run jobs executions list --job ${JOB_NAME} --region ${{ env.REGION }} --limit 1 --format="value(name)")
+            if [ ! -z "$EXECUTION_NAME" ]; then
+              echo "Execution name: $EXECUTION_NAME"
+              gcloud run jobs executions describe ${EXECUTION_NAME} --region ${{ env.REGION }}
+            fi
+            exit 1
+          }
+          
+          echo "✅ Migrations completed successfully!"
 
       - name: Get service URL
         id: get-url
