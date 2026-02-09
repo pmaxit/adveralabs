@@ -243,6 +243,10 @@ local_settings.py
 .env
 .env.local
 
+# GitHub Actions keys
+github-actions-key.json
+*.json.key
+
 # Deployment files with sensitive data
 deploy/*.sh.bak
 deploy/secrets/

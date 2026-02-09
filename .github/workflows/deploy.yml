@@ -1,0 +1,120 @@
+name: Deploy to Google Cloud Run
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:  # Allow manual triggering
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  REGION: us-central1
+  SERVICE_NAME: adveralabs-web
+  APP_NAME: adveralabs
+  REPOSITORY: adveralabs-repo
+  DB_INSTANCE_NAME: adveralabs-mysql
+  SERVICE_ACCOUNT: adveralabs-sa
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+      id-token: write  # Required for Workload Identity Federation
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
+      - name: Configure Docker for Artifact Registry
+        run: |
+          gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
+
+      - name: Get Cloud SQL connection name
+        id: get-connection
+        run: |
+          CONNECTION_NAME=$(gcloud sql instances describe ${{ env.DB_INSTANCE_NAME }} --format="value(connectionName)")
+          echo "connection_name=$CONNECTION_NAME" >> $GITHUB_OUTPUT
+
+      - name: Build Docker image
+        run: |
+          IMAGE_NAME="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.APP_NAME }}"
+          docker build -t ${IMAGE_NAME}:${{ github.sha }} -t ${IMAGE_NAME}:latest .
+
+      - name: Push Docker image
+        run: |
+          IMAGE_NAME="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.APP_NAME }}"
+          docker push ${IMAGE_NAME}:${{ github.sha }}
+          docker push ${IMAGE_NAME}:latest
+
+      - name: Deploy to Cloud Run
+        run: |
+          IMAGE_NAME="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.APP_NAME }}"
+          gcloud run deploy ${{ env.SERVICE_NAME }} \
+            --image ${IMAGE_NAME}:${{ github.sha }} \
+            --platform managed \
+            --region ${{ env.REGION }} \
+            --allow-unauthenticated \
+            --service-account ${{ env.SERVICE_ACCOUNT }}@${{ env.PROJECT_ID }}.iam.gserviceaccount.com \
+            --add-cloudsql-instances ${{ steps.get-connection.outputs.connection_name }} \
+            --set-env-vars="USE_CLOUD_SQL=True,DJANGO_SETTINGS_MODULE=adveralabs.settings,DB_NAME=adveralabs_db,DB_USER=adveralabs_user,DB_HOST=/cloudsql/${{ steps.get-connection.outputs.connection_name }}" \
+            --set-secrets="DB_PASSWORD=db-password:latest" \
+            --memory 512Mi \
+            --cpu 1 \
+            --timeout 300 \
+            --max-instances 10 \
+            --min-instances 0 \
+            --port 8080
+
+      - name: Run database migrations
+        run: |
+          IMAGE_NAME="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.APP_NAME }}"
+          JOB_NAME="${{ env.APP_NAME }}-migrate"
+          
+          # Create or update migration job
+          gcloud run jobs create ${JOB_NAME} \
+            --image ${IMAGE_NAME}:${{ github.sha }} \
+            --region ${{ env.REGION }} \
+            --service-account ${{ env.SERVICE_ACCOUNT }}@${{ env.PROJECT_ID }}.iam.gserviceaccount.com \
+            --set-cloudsql-instances ${{ steps.get-connection.outputs.connection_name }} \
+            --set-env-vars="USE_CLOUD_SQL=True,DJANGO_SETTINGS_MODULE=adveralabs.settings" \
+            --set-secrets="DB_PASSWORD=db-password:latest" \
+            --memory 512Mi \
+            --cpu 1 \
+            --task-timeout 600 \
+            --command python \
+            --args manage.py,migrate \
+            --max-retries 1 || \
+          gcloud run jobs update ${JOB_NAME} \
+            --image ${IMAGE_NAME}:${{ github.sha }} \
+            --region ${{ env.REGION }} \
+            --set-cloudsql-instances ${{ steps.get-connection.outputs.connection_name }} \
+            --update-env-vars="USE_CLOUD_SQL=True,DJANGO_SETTINGS_MODULE=adveralabs.settings" \
+            --update-secrets="DB_PASSWORD=db-password:latest" \
+            --task-timeout 600
+          
+          # Execute migration job
+          gcloud run jobs execute ${JOB_NAME} --region ${{ env.REGION }} --wait
+
+      - name: Get service URL
+        id: get-url
+        run: |
+          SERVICE_URL=$(gcloud run services describe ${{ env.SERVICE_NAME }} \
+            --region ${{ env.REGION }} \
+            --format="value(status.url)")
+          echo "service_url=$SERVICE_URL" >> $GITHUB_OUTPUT
+
+      - name: Deployment summary
+        run: |
+          echo "🚀 Deployment successful!"
+          echo "Service URL: ${{ steps.get-url.outputs.service_url }}"
+          echo "Image: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.APP_NAME }}:${{ github.sha }}"
+
