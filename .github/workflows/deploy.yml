@@ -63,7 +63,14 @@ jobs:
       - name: Push Docker image
         run: |
           IMAGE_NAME="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.APP_NAME }}"
-          docker push ${IMAGE_NAME}:${{ github.sha }}
+          echo "Pushing image: ${IMAGE_NAME}:${{ github.sha }}"
+          docker push ${IMAGE_NAME}:${{ github.sha }} || {
+            echo "Error: Failed to push image. Checking permissions..."
+            echo "Repository: ${{ env.REPOSITORY }}"
+            echo "Region: ${{ env.REGION }}"
+            echo "Please ensure the service account has 'Artifact Registry Writer' role"
+            exit 1
+          }
           docker push ${IMAGE_NAME}:latest
 
       - name: Deploy to Cloud Run

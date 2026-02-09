@@ -51,6 +51,18 @@ gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --role="roles/artifactregistry.writer" \
     --condition=None 2>/dev/null || true
 
+echo "  - Artifact Registry Reader (for pulling images)"
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+    --member="serviceAccount:${SERVICE_ACCOUNT_NAME}@${PROJECT_ID}.iam.gserviceaccount.com" \
+    --role="roles/artifactregistry.reader" \
+    --condition=None 2>/dev/null || true
+
+echo "  - Storage Admin (for Artifact Registry)"
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+    --member="serviceAccount:${SERVICE_ACCOUNT_NAME}@${PROJECT_ID}.iam.gserviceaccount.com" \
+    --role="roles/storage.admin" \
+    --condition=None 2>/dev/null || true
+
 echo "  - Cloud SQL Client"
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --member="serviceAccount:${SERVICE_ACCOUNT_NAME}@${PROJECT_ID}.iam.gserviceaccount.com" \

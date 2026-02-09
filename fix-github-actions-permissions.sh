@@ -33,12 +33,30 @@ gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --role="roles/cloudsql.viewer" \
     --condition=None
 
+# Grant Artifact Registry permissions
+echo -e "${YELLOW}Granting Artifact Registry permissions...${NC}"
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+    --member="serviceAccount:${SERVICE_ACCOUNT_NAME}@${PROJECT_ID}.iam.gserviceaccount.com" \
+    --role="roles/artifactregistry.writer" \
+    --condition=None
+
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+    --member="serviceAccount:${SERVICE_ACCOUNT_NAME}@${PROJECT_ID}.iam.gserviceaccount.com" \
+    --role="roles/artifactregistry.reader" \
+    --condition=None
+
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+    --member="serviceAccount:${SERVICE_ACCOUNT_NAME}@${PROJECT_ID}.iam.gserviceaccount.com" \
+    --role="roles/storage.admin" \
+    --condition=None
+
 echo ""
-echo -e "${GREEN}✓ Permission granted!${NC}"
+echo -e "${GREEN}✓ All permissions granted!${NC}"
 echo ""
 echo "The GitHub Actions service account can now:"
 echo "  - View Cloud SQL instances"
 echo "  - Get connection names"
+echo "  - Push/pull Docker images to Artifact Registry"
 echo ""
 echo "You can now retry the GitHub Actions workflow."
 
