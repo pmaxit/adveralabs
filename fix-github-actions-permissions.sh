@@ -62,6 +62,20 @@ gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --role="roles/run.developer" \
     --condition=None
 
+# Grant Cloud SQL Client permission (for connecting to database)
+echo -e "${YELLOW}Granting Cloud SQL Client permission...${NC}"
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+    --member="serviceAccount:${SERVICE_ACCOUNT_NAME}@${PROJECT_ID}.iam.gserviceaccount.com" \
+    --role="roles/cloudsql.client" \
+    --condition=None
+
+# Grant Service Account User permission (for using service accounts)
+echo -e "${YELLOW}Granting Service Account User permission...${NC}"
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+    --member="serviceAccount:${SERVICE_ACCOUNT_NAME}@${PROJECT_ID}.iam.gserviceaccount.com" \
+    --role="roles/iam.serviceAccountUser" \
+    --condition=None
+
 echo ""
 echo -e "${GREEN}✓ All permissions granted!${NC}"
 echo ""
