@@ -50,6 +50,18 @@ gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --role="roles/storage.admin" \
     --condition=None
 
+# Grant Cloud Run permissions
+echo -e "${YELLOW}Granting Cloud Run permissions...${NC}"
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+    --member="serviceAccount:${SERVICE_ACCOUNT_NAME}@${PROJECT_ID}.iam.gserviceaccount.com" \
+    --role="roles/run.admin" \
+    --condition=None
+
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+    --member="serviceAccount:${SERVICE_ACCOUNT_NAME}@${PROJECT_ID}.iam.gserviceaccount.com" \
+    --role="roles/run.developer" \
+    --condition=None
+
 echo ""
 echo -e "${GREEN}✓ All permissions granted!${NC}"
 echo ""
@@ -57,6 +69,8 @@ echo "The GitHub Actions service account can now:"
 echo "  - View Cloud SQL instances"
 echo "  - Get connection names"
 echo "  - Push/pull Docker images to Artifact Registry"
+echo "  - Deploy to Cloud Run services"
+echo "  - Create and execute Cloud Run Jobs (for migrations)"
 echo ""
 echo "You can now retry the GitHub Actions workflow."
 

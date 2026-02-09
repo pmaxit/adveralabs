@@ -39,10 +39,16 @@ gcloud iam service-accounts create ${SERVICE_ACCOUNT_NAME} \
 # Grant necessary permissions
 echo -e "${YELLOW}Granting permissions...${NC}"
 
-echo "  - Cloud Run Admin"
+echo "  - Cloud Run Admin (deploy services)"
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --member="serviceAccount:${SERVICE_ACCOUNT_NAME}@${PROJECT_ID}.iam.gserviceaccount.com" \
     --role="roles/run.admin" \
+    --condition=None 2>/dev/null || true
+
+echo "  - Cloud Run Developer (create/update jobs)"
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+    --member="serviceAccount:${SERVICE_ACCOUNT_NAME}@${PROJECT_ID}.iam.gserviceaccount.com" \
+    --role="roles/run.developer" \
     --condition=None 2>/dev/null || true
 
 echo "  - Artifact Registry Writer"
