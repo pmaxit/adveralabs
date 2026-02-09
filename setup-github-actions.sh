@@ -69,6 +69,12 @@ gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --role="roles/secretmanager.secretAccessor" \
     --condition=None 2>/dev/null || true
 
+echo "  - Cloud SQL Viewer"
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+    --member="serviceAccount:${SERVICE_ACCOUNT_NAME}@${PROJECT_ID}.iam.gserviceaccount.com" \
+    --role="roles/cloudsql.viewer" \
+    --condition=None 2>/dev/null || true
+
 # Create and download key
 echo -e "${YELLOW}Creating service account key...${NC}"
 gcloud iam service-accounts keys create ${KEY_FILE} \

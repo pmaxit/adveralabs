@@ -43,7 +43,16 @@ jobs:
       - name: Get Cloud SQL connection name
         id: get-connection
         run: |
-          CONNECTION_NAME=$(gcloud sql instances describe ${{ env.DB_INSTANCE_NAME }} --format="value(connectionName)")
+          echo "Checking for Cloud SQL instance: ${{ env.DB_INSTANCE_NAME }}"
+          CONNECTION_NAME=$(gcloud sql instances describe ${{ env.DB_INSTANCE_NAME }} --format="value(connectionName)" 2>&1)
+          if [ $? -ne 0 ]; then
+            echo "Error: Could not find Cloud SQL instance. Please ensure:"
+            echo "1. The instance name is correct: ${{ env.DB_INSTANCE_NAME }}"
+            echo "2. The instance exists in project: ${{ secrets.GCP_PROJECT_ID }}"
+            echo "3. The service account has 'Cloud SQL Viewer' role"
+            exit 1
+          fi
+          echo "Found connection: $CONNECTION_NAME"
           echo "connection_name=$CONNECTION_NAME" >> $GITHUB_OUTPUT
 
       - name: Build Docker image
