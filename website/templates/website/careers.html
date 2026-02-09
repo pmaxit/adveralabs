@@ -1,0 +1,304 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="page-hero">
+    <div class="container">
+        <h1>Join Our Team</h1>
+        <p class="hero-subtitle">Help us build the future of ad optimization. We're looking for talented people who are passionate about solving hard problems.</p>
+    </div>
+</section>
+
+<!-- Why Work Here -->
+<section class="content-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Why Work at Advera Labs</h2>
+        </div>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">🚀</div>
+                <h3>High Impact</h3>
+                <p>Your work directly impacts how brands spend millions in ad dollars. See real results.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🧠</div>
+                <h3>Interesting Problems</h3>
+                <p>Work on ML optimization, cross-channel coordination, and incrementality measurement.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">💰</div>
+                <h3>Competitive Compensation</h3>
+                <p>Top-of-market salaries, equity, and comprehensive benefits.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🌍</div>
+                <h3>Remote-First</h3>
+                <p>Work from anywhere. We're a distributed team across multiple time zones.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">📈</div>
+                <h3>Growth Opportunities</h3>
+                <p>Fast-growing startup means rapid career advancement and learning.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🎯</div>
+                <h3>Mission-Driven</h3>
+                <p>Help brands optimize for profit, not just clicks. Make advertising more efficient.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Open Positions -->
+<section class="content-section bg-secondary">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Open Positions</h2>
+            <p class="section-subtitle">We're hiring across engineering, product, marketing, and customer success.</p>
+        </div>
+        <div class="jobs-list">
+            {% for job in job_openings %}
+            <div class="job-card">
+                <div class="job-header">
+                    <div>
+                        <h3 class="job-title">{{ job.title }}</h3>
+                        <div class="job-meta">
+                            <span class="job-department">{{ job.department }}</span>
+                            <span class="job-location">{{ job.location }}</span>
+                            <span class="job-type">{{ job.type }}</span>
+                        </div>
+                    </div>
+                    <a href="{% url 'contact' %}?subject=Application: {{ job.title }}" class="btn-primary">Apply</a>
+                </div>
+                <p class="job-description">{{ job.description }}</p>
+                <div class="job-requirements">
+                    <h4>Requirements:</h4>
+                    <ul>
+                        {% for req in job.requirements %}
+                        <li>{{ req }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Culture Section -->
+<section class="content-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Our Culture</h2>
+        </div>
+        <div class="culture-content">
+            <div class="culture-text">
+                <p>At Advera Labs, we believe in:</p>
+                <ul>
+                    <li><strong>Ownership:</strong> Take end-to-end ownership of your work</li>
+                    <li><strong>Transparency:</strong> Open communication, clear goals, honest feedback</li>
+                    <li><strong>Learning:</strong> We're all learning. Ask questions, experiment, iterate</li>
+                    <li><strong>Balance:</strong> Sustainable pace. We're building for the long term</li>
+                    <li><strong>Impact:</strong> Focus on what moves the needle for customers</li>
+                </ul>
+                <p>We're a small, tight-knit team. Every person's contribution matters. If you're excited about building something that helps brands optimize their ad spend more effectively, we'd love to hear from you.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Don't See a Role That Fits?</h2>
+            <p>We're always looking for talented people. Send us your resume and tell us how you'd contribute.</p>
+            <div class="cta-buttons">
+                <a href="{% url 'contact' %}?subject=General Application" class="btn-primary large">Get in Touch</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.page-hero {
+    padding: 160px 0 80px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    text-align: center;
+}
+
+.page-hero h1 {
+    font-size: 56px;
+    font-weight: 800;
+    margin-bottom: 24px;
+}
+
+.hero-subtitle {
+    font-size: 24px;
+    opacity: 0.9;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.content-section {
+    padding: 80px 0;
+}
+
+.content-section.bg-secondary {
+    background: var(--bg-secondary);
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+    margin-top: 48px;
+}
+
+.benefit-card {
+    background: white;
+    padding: 32px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    text-align: center;
+}
+
+.benefit-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.benefit-card h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.benefit-card p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.jobs-list {
+    margin-top: 48px;
+}
+
+.job-card {
+    background: white;
+    padding: 32px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-md);
+}
+
+.job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.job-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.job-meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.job-department,
+.job-location,
+.job-type {
+    font-size: 14px;
+    color: var(--text-secondary);
+    padding: 4px 12px;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+}
+
+.job-description {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    line-height: 1.6;
+}
+
+.job-requirements {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+}
+
+.job-requirements h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.job-requirements ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.job-requirements li {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    padding-left: 24px;
+    position: relative;
+}
+
+.job-requirements li::before {
+    content: "•";
+    color: var(--primary);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.culture-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.culture-text {
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--text-primary);
+}
+
+.culture-text p {
+    margin-bottom: 24px;
+}
+
+.culture-text ul {
+    margin: 24px 0;
+    padding-left: 24px;
+}
+
+.culture-text li {
+    margin-bottom: 16px;
+}
+
+@media (max-width: 768px) {
+    .job-header {
+        flex-direction: column;
+        gap: 16px;
+    }
+}
+</style>
+{% endblock %}
+

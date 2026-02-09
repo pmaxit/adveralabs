@@ -1,0 +1,305 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="page-hero">
+    <div class="container">
+        <h1>Get in Touch</h1>
+        <p class="hero-subtitle">Have questions? Want to see a demo? We're here to help.</p>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="content-section">
+    <div class="container">
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h2>Let's Talk</h2>
+                <p>Whether you're interested in a demo, have questions about pricing, or want to discuss how Advera Labs can help optimize your ad spend, we'd love to hear from you.</p>
+                
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <div class="method-icon">📧</div>
+                        <div>
+                            <h3>Email</h3>
+                            <p><a href="mailto:hello@adveralabs.com">hello@adveralabs.com</a></p>
+                            <p><a href="mailto:sales@adveralabs.com">sales@adveralabs.com</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <div class="method-icon">💬</div>
+                        <div>
+                            <h3>Support</h3>
+                            <p><a href="{% url 'support' %}">Visit Support Center</a></p>
+                            <p>Response within 24 hours</p>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <div class="method-icon">📍</div>
+                        <div>
+                            <h3>Office</h3>
+                            <p>San Francisco, CA</p>
+                            <p>Remote-first company</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form-container">
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                
+                <form method="post" class="contact-form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <input type="text" id="company" name="company">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <select id="subject" name="subject" required>
+                            <option value="General Inquiry">General Inquiry</option>
+                            <option value="Sales Inquiry">Sales Inquiry</option>
+                            <option value="Demo Request">Demo Request</option>
+                            <option value="Support">Support</option>
+                            <option value="Partnership">Partnership</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary large">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="content-section bg-secondary">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-list">
+            <div class="faq-item">
+                <h3>How quickly can I get started?</h3>
+                <p>Setup takes about 1 hour. Connect your Facebook Ads and Google Ads accounts, and we'll auto-detect your current setup and run an ROI audit.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Do I need to change my existing campaigns?</h3>
+                <p>No. Advera Labs works on top of your existing campaigns. We optimize budgets and send better signals—you keep full control.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What's the minimum ad spend requirement?</h3>
+                <p>We work with brands spending $30K+ per month across Meta and Google. For smaller budgets, we recommend starting with one platform first.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Is there a free trial?</h3>
+                <p>Yes! 14-day free trial, no credit card required. See results in the first week.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can I use this with my agency?</h3>
+                <p>Absolutely. Many agencies use Advera Labs to manage multiple client accounts. We offer agency-specific pricing and features.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.page-hero {
+    padding: 160px 0 80px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    text-align: center;
+}
+
+.page-hero h1 {
+    font-size: 56px;
+    font-weight: 800;
+    margin-bottom: 24px;
+}
+
+.hero-subtitle {
+    font-size: 24px;
+    opacity: 0.9;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.content-section {
+    padding: 80px 0;
+}
+
+.content-section.bg-secondary {
+    background: var(--bg-secondary);
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+}
+
+.contact-info h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--text-primary);
+}
+
+.contact-info > p {
+    font-size: 18px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 48px;
+}
+
+.contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.contact-method {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.method-icon {
+    font-size: 32px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.contact-method h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.contact-method p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+.contact-method a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.contact-form-container {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.alert {
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+}
+
+.alert-success {
+    background: #D1FAE5;
+    color: #065F46;
+    border: 1px solid #10B981;
+}
+
+.faq-list {
+    max-width: 800px;
+    margin: 48px auto 0;
+}
+
+.faq-item {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-sm);
+}
+
+.faq-item h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.faq-item p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+@media (max-width: 968px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+{% endblock %}
+

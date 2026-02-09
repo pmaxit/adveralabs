@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ page_title|default:"Advera Labs" }}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'website/css/styles.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <a href="{% url 'home' %}" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+                        <img src="{% static 'website/images/logo.png' %}" alt="Advera Labs" class="logo-image" style="height: 40px; width: auto;">
+                        <span class="logo-text">Advera Labs</span>
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="{% url 'home' %}#features">Features</a></li>
+                    <li><a href="{% url 'home' %}#how-it-works">How It Works</a></li>
+                    <li><a href="{% url 'home' %}#comparison">Why Us</a></li>
+                    <li><a href="{% url 'home' %}#pricing">Pricing</a></li>
+                    <li><a href="{% url 'blog' %}">Blog</a></li>
+                    <li><a href="{% url 'contact' %}" class="btn-secondary">Contact</a></li>
+                    <li><a href="{% url 'home' %}#demo" class="btn-primary">Get Started</a></li>
+                </ul>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <a href="{% url 'home' %}" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+                            <img src="{% static 'website/images/logo.png' %}" alt="Advera Labs" class="logo-image" style="height: 32px; width: auto;">
+                            <span class="logo-text">Advera Labs</span>
+                        </a>
+                    </div>
+                    <p>AI-powered cross-channel ad optimization for maximum profit.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="{% url 'home' %}#features">Features</a></li>
+                        <li><a href="{% url 'home' %}#how-it-works">How It Works</a></li>
+                        <li><a href="{% url 'home' %}#pricing">Pricing</a></li>
+                        <li><a href="{% url 'home' %}#comparison">Why Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="{% url 'about' %}">About</a></li>
+                        <li><a href="{% url 'blog' %}">Blog</a></li>
+                        <li><a href="{% url 'careers' %}">Careers</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="{% url 'documentation' %}">Documentation</a></li>
+                        <li><a href="{% url 'api_docs' %}">API</a></li>
+                        <li><a href="{% url 'support' %}">Support</a></li>
+                        <li><a href="{% url 'privacy' %}">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Advera Labs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'website/js/script.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
+

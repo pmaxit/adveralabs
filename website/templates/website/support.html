@@ -1,0 +1,433 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="page-hero">
+    <div class="container">
+        <h1>Support Center</h1>
+        <p class="hero-subtitle">Find answers to common questions or get help from our support team.</p>
+    </div>
+</section>
+
+<!-- Quick Help -->
+<section class="content-section">
+    <div class="container">
+        <div class="help-categories">
+            <div class="help-category">
+                <div class="category-icon">🚀</div>
+                <h3>Getting Started</h3>
+                <ul>
+                    <li><a href="{% url 'documentation' %}#quick-start">Quick Start Guide</a></li>
+                    <li><a href="{% url 'documentation' %}#account-setup">Account Setup</a></li>
+                    <li><a href="{% url 'documentation' %}#connecting-accounts">Connecting Accounts</a></li>
+                </ul>
+            </div>
+            <div class="help-category">
+                <div class="category-icon">⚙️</div>
+                <h3>Features</h3>
+                <ul>
+                    <li><a href="{% url 'documentation' %}#roi-audit">ROI Audit</a></li>
+                    <li><a href="{% url 'documentation' %}#budget-optimization">Budget Optimization</a></li>
+                    <li><a href="{% url 'documentation' %}#signal-generation">Signal Generation</a></li>
+                </ul>
+            </div>
+            <div class="help-category">
+                <div class="category-icon">🔧</div>
+                <h3>Troubleshooting</h3>
+                <ul>
+                    <li><a href="#tracking-issues">Tracking Issues</a></li>
+                    <li><a href="#api-errors">API Errors</a></li>
+                    <li><a href="#budget-changes">Budget Changes Not Applying</a></li>
+                </ul>
+            </div>
+            <div class="help-category">
+                <div class="category-icon">💡</div>
+                <h3>Best Practices</h3>
+                <ul>
+                    <li><a href="{% url 'documentation' %}#best-practices">Optimization Best Practices</a></li>
+                    <li><a href="{% url 'documentation' %}#ltv-setup">Setting Up LTV</a></li>
+                    <li><a href="{% url 'documentation' %}#incrementality">Incrementality Testing</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="content-section bg-secondary">
+    <div class="container">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        
+        <div class="faq-categories">
+            <div class="faq-category">
+                <h3>Setup & Onboarding</h3>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <h4>How long does setup take?</h4>
+                        <p>Most customers complete setup in under 1 hour. This includes connecting accounts, running the ROI audit, and enabling optimization.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>What permissions does Advera Labs need?</h4>
+                        <p>We need read access to campaign data and write access to update budgets. We never create or delete campaigns. All access is read-only except for budget updates you explicitly approve.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Can I use Advera Labs with multiple ad accounts?</h4>
+                        <p>Yes! You can connect multiple Facebook and Google Ads accounts. Each account is optimized independently, but you can view unified reporting across all accounts.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-category">
+                <h3>Optimization</h3>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <h4>How often does Advera Labs optimize budgets?</h4>
+                        <p>By default, we run optimization daily. You can configure this to run more frequently (every few hours) or less frequently (weekly) based on your needs.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Will Advera Labs pause my campaigns?</h4>
+                        <p>No. We only adjust budgets. We never pause, delete, or modify campaigns, ads, or targeting. You maintain full control.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>What's the maximum budget change per update?</h4>
+                        <p>By default, we limit changes to 30% per update to avoid wild swings. You can adjust this in settings from 10% (conservative) to 50% (aggressive).</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>How do I know if optimization is working?</h4>
+                        <p>We provide built-in incrementality testing. Run an A/B test comparing control (platform automation) vs. treatment (Advera Labs) to measure true incremental lift.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-category">
+                <h3>Billing & Pricing</h3>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <h4>How is pricing calculated?</h4>
+                        <p>Pricing is based on your total monthly ad spend across connected accounts. We offer tiered pricing starting at $499/month for $30K-$50K spend.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Is there a free trial?</h4>
+                        <p>Yes! 14-day free trial, no credit card required. Full access to all features. Cancel anytime.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Do you charge based on performance?</h4>
+                        <p>Our base plans are flat monthly fees. Enterprise plans can include performance-based pricing (e.g., % of incremental profit) as an option.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-category">
+                <h3>Technical</h3>
+                <div class="faq-list">
+                    <div class="faq-item" id="tracking-issues">
+                        <h4>My ROI audit shows tracking issues. How do I fix them?</h4>
+                        <p>Each issue in the ROI audit includes specific recommendations. Common fixes include: setting up Conversions API (CAPI) for Facebook, enabling Enhanced Conversions for Google, ensuring conversion values are sent, and fixing broken pixels.</p>
+                    </div>
+                    <div class="faq-item" id="api-errors">
+                        <h4>I'm getting API errors. What should I do?</h4>
+                        <p>Check the error message for specific details. Common issues: invalid API key (check Authorization header), rate limit exceeded (check X-RateLimit headers), or invalid request parameters. See our <a href="{% url 'api_docs' %}">API documentation</a> for details.</p>
+                    </div>
+                    <div class="faq-item" id="budget-changes">
+                        <h4>Budget changes aren't being applied. Why?</h4>
+                        <p>Check: 1) Do you have budget update permissions enabled? 2) Are changes within platform limits? 3) Is the campaign/adset active? 4) Check the optimization logs for specific error messages.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>How do I set up LTV data?</h4>
+                        <p>You can upload historical customer data, use our LTV prediction model, or provide LTV via API. See our <a href="{% url 'documentation' %}#ltv-setup">LTV Setup Guide</a> for detailed instructions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Support -->
+<section class="content-section">
+    <div class="container">
+        <div class="support-contact">
+            <div class="support-options">
+                <h2>Still Need Help?</h2>
+                <p>Our support team is here to help. Choose the option that works best for you.</p>
+                
+                <div class="support-methods">
+                    <div class="support-method-card">
+                        <div class="method-icon-large">📧</div>
+                        <h3>Email Support</h3>
+                        <p><a href="mailto:support@adveralabs.com">support@adveralabs.com</a></p>
+                        <p class="method-note">Response within 24 hours</p>
+                    </div>
+                    <div class="support-method-card">
+                        <div class="method-icon-large">💬</div>
+                        <h3>Live Chat</h3>
+                        <p>Available in your dashboard</p>
+                        <p class="method-note">Mon-Fri, 9am-5pm PST</p>
+                    </div>
+                    <div class="support-method-card">
+                        <div class="method-icon-large">📞</div>
+                        <h3>Phone Support</h3>
+                        <p>Enterprise customers only</p>
+                        <p class="method-note">Dedicated support line</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form-sidebar">
+                <h3>Send Us a Message</h3>
+                <form method="post" action="{% url 'contact' %}" class="support-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="subject" value="Support Request">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" rows="4" placeholder="How can we help?" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.page-hero {
+    padding: 160px 0 80px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    text-align: center;
+}
+
+.page-hero h1 {
+    font-size: 56px;
+    font-weight: 800;
+    margin-bottom: 24px;
+}
+
+.hero-subtitle {
+    font-size: 24px;
+    opacity: 0.9;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.content-section {
+    padding: 80px 0;
+}
+
+.content-section.bg-secondary {
+    background: var(--bg-secondary);
+}
+
+.help-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 32px;
+}
+
+.help-category {
+    background: white;
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    text-align: center;
+}
+
+.category-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.help-category h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.help-category ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+
+.help-category li {
+    margin-bottom: 8px;
+}
+
+.help-category a {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.help-category a:hover {
+    text-decoration: underline;
+}
+
+.faq-categories {
+    margin-top: 48px;
+}
+
+.faq-category {
+    margin-bottom: 48px;
+}
+
+.faq-category h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    color: var(--text-primary);
+}
+
+.faq-list {
+    display: grid;
+    gap: 16px;
+}
+
+.faq-item {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+}
+
+.faq-item h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.faq-item p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.faq-item a {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+.support-contact {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 64px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.support-options h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.support-options > p {
+    font-size: 18px;
+    color: var(--text-secondary);
+    margin-bottom: 32px;
+}
+
+.support-methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+}
+
+.support-method-card {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+}
+
+.method-icon-large {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.support-method-card h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.support-method-card p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.support-method-card a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.method-note {
+    font-size: 14px;
+    color: var(--text-light);
+    font-style: italic;
+}
+
+.contact-form-sidebar {
+    background: white;
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+.contact-form-sidebar h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    color: var(--text-primary);
+}
+
+.support-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.support-form input,
+.support-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: inherit;
+}
+
+.support-form input:focus,
+.support-form textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+@media (max-width: 968px) {
+    .support-contact {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-form-sidebar {
+        position: static;
+    }
+}
+</style>
+{% endblock %}
+

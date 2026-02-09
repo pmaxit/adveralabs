@@ -1,0 +1,424 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="page-hero">
+    <div class="container">
+        <h1>Documentation</h1>
+        <p class="hero-subtitle">Everything you need to get started with Advera Labs and maximize your ROI.</p>
+    </div>
+</section>
+
+<!-- Documentation Content -->
+<section class="content-section">
+    <div class="container">
+        <div class="docs-layout">
+            <aside class="docs-sidebar">
+                <nav class="docs-nav">
+                    <h3>Getting Started</h3>
+                    <ul>
+                        <li><a href="#quick-start">Quick Start Guide</a></li>
+                        <li><a href="#account-setup">Account Setup</a></li>
+                        <li><a href="#connecting-accounts">Connecting Accounts</a></li>
+                    </ul>
+                    
+                    <h3>Features</h3>
+                    <ul>
+                        <li><a href="#roi-audit">ROI Audit</a></li>
+                        <li><a href="#budget-optimization">Budget Optimization</a></li>
+                        <li><a href="#signal-generation">Signal Generation</a></li>
+                        <li><a href="#automation">Automation Rules</a></li>
+                    </ul>
+                    
+                    <h3>Guides</h3>
+                    <ul>
+                        <li><a href="#ltv-setup">LTV Setup Guide</a></li>
+                        <li><a href="#incrementality">Incrementality Testing</a></li>
+                        <li><a href="#best-practices">Best Practices</a></li>
+                    </ul>
+                </nav>
+            </aside>
+            
+            <main class="docs-content">
+                <section id="quick-start" class="docs-section">
+                    <h2>Quick Start Guide</h2>
+                    <p>Get up and running with Advera Labs in under an hour.</p>
+                    
+                    <h3>Step 1: Create Your Account</h3>
+                    <p>Sign up for a free 14-day trial. No credit card required.</p>
+                    
+                    <h3>Step 2: Connect Your Ad Accounts</h3>
+                    <p>Connect your Facebook Ads and Google Ads accounts. We use OAuth for secure, read-only access.</p>
+                    <pre><code>1. Go to Settings → Integrations
+2. Click "Connect Facebook Ads"
+3. Authorize Advera Labs
+4. Repeat for Google Ads</code></pre>
+                    
+                    <h3>Step 3: Run ROI Audit</h3>
+                    <p>Our AI automatically detects tracking issues, misconfigured conversions, and optimization opportunities.</p>
+                    
+                    <h3>Step 4: Enable Optimization</h3>
+                    <p>Turn on automated budget allocation and signal generation. Start with conservative settings and scale up.</p>
+                </section>
+                
+                <section id="account-setup" class="docs-section">
+                    <h2>Account Setup</h2>
+                    <p>Configure your account settings to match your business goals.</p>
+                    
+                    <h3>Optimization Goals</h3>
+                    <p>Choose your primary optimization goal:</p>
+                    <ul>
+                        <li><strong>ROAS:</strong> Maximize return on ad spend</li>
+                        <li><strong>Profit:</strong> Optimize for profit margins (requires margin data)</li>
+                        <li><strong>LTV:</strong> Optimize for customer lifetime value (requires LTV data)</li>
+                        <li><strong>CPA:</strong> Minimize cost per acquisition</li>
+                    </ul>
+                    
+                    <h3>Budget Constraints</h3>
+                    <p>Set your total daily/weekly budget and maximum change ratios to control how aggressively we optimize.</p>
+                </section>
+                
+                <section id="connecting-accounts" class="docs-section">
+                    <h2>Connecting Accounts</h2>
+                    
+                    <h3>Facebook Ads</h3>
+                    <p>To connect your Facebook Ads account:</p>
+                    <ol>
+                        <li>Navigate to Settings → Integrations</li>
+                        <li>Click "Connect Facebook Ads"</li>
+                        <li>You'll be redirected to Facebook to authorize</li>
+                        <li>Grant the following permissions:
+                            <ul>
+                                <li>ads_read (read campaign data)</li>
+                                <li>ads_management (update budgets)</li>
+                                <li>business_management (access ad accounts)</li>
+                            </ul>
+                        </li>
+                        <li>Select the ad accounts you want to connect</li>
+                    </ol>
+                    
+                    <h3>Google Ads</h3>
+                    <p>To connect your Google Ads account:</p>
+                    <ol>
+                        <li>Navigate to Settings → Integrations</li>
+                        <li>Click "Connect Google Ads"</li>
+                        <li>Sign in with your Google account</li>
+                        <li>Grant access to your Google Ads accounts</li>
+                        <li>Select the customer IDs you want to connect</li>
+                    </ol>
+                    
+                    <p><strong>Note:</strong> You'll need a Google Ads API developer token. Contact support if you need help obtaining one.</p>
+                </section>
+                
+                <section id="roi-audit" class="docs-section">
+                    <h2>ROI Audit</h2>
+                    <p>The ROI Audit feature automatically scans your ad accounts for issues that prevent effective optimization.</p>
+                    
+                    <h3>What We Check</h3>
+                    <ul>
+                        <li><strong>Tracking Issues:</strong> Missing conversions, broken pixels, low conversion volume</li>
+                        <li><strong>Configuration Issues:</strong> Wrong optimization goals, missing LTV/profit data</li>
+                        <li><strong>Performance Issues:</strong> Negative ROAS campaigns, declining trends</li>
+                        <li><strong>Platform-Specific:</strong> Missing CAPI setup, Enhanced Conversions not enabled</li>
+                    </ul>
+                    
+                    <h3>Understanding Your Health Score</h3>
+                    <p>Your overall health score (0-100) reflects:</p>
+                    <ul>
+                        <li>Number and severity of issues</li>
+                        <li>Data quality</li>
+                        <li>Configuration correctness</li>
+                        <li>Performance metrics</li>
+                    </ul>
+                    
+                    <p>A score below 70 indicates significant issues that are likely costing you money.</p>
+                </section>
+                
+                <section id="budget-optimization" class="docs-section">
+                    <h2>Budget Optimization</h2>
+                    <p>Advera Labs uses multi-armed bandit algorithms to allocate budgets across campaigns and platforms.</p>
+                    
+                    <h3>Optimization Strategies</h3>
+                    <ul>
+                        <li><strong>Intelligent (Default):</strong> AI-powered allocation with reasoning</li>
+                        <li><strong>UCB:</strong> Upper Confidence Bound - balances exploration and exploitation</li>
+                        <li><strong>Thompson Sampling:</strong> Bayesian approach using probability distributions</li>
+                        <li><strong>Epsilon-Greedy:</strong> Simple exploration/exploitation balance</li>
+                        <li><strong>Adaptive:</strong> Automatically switches strategies based on data volume</li>
+                    </ul>
+                    
+                    <h3>Budget Constraints</h3>
+                    <p>Set maximum change ratios to control how aggressively budgets are adjusted:</p>
+                    <ul>
+                        <li><strong>Conservative (10%):</strong> Small, gradual changes</li>
+                        <li><strong>Moderate (30%):</strong> Balanced approach (recommended)</li>
+                        <li><strong>Aggressive (50%):</strong> Larger shifts for faster optimization</li>
+                    </ul>
+                </section>
+                
+                <section id="signal-generation" class="docs-section">
+                    <h2>Smart Signal Generation</h2>
+                    <p>Feed platforms higher-quality conversion signals to unlock the full potential of Smart Bidding.</p>
+                    
+                    <h3>Event Classification</h3>
+                    <p>We automatically classify your events:</p>
+                    <ul>
+                        <li><strong>High Value Purchase:</strong> Purchase with predicted LTV > threshold</li>
+                        <li><strong>Qualified Lead:</strong> Lead that meets CRM qualification rules</li>
+                        <li><strong>Purchase:</strong> Standard purchase event</li>
+                        <li><strong>Trial Start:</strong> SaaS trial start</li>
+                        <li><strong>Subscription:</strong> SaaS subscription conversion</li>
+                    </ul>
+                    
+                    <h3>Value Calculation</h3>
+                    <p>Conversion values are calculated based on:</p>
+                    <ul>
+                        <li>Revenue × profit margin (if available)</li>
+                        <li>Predicted LTV (for high-value purchases)</li>
+                        <li>Estimated lead value (for qualified leads)</li>
+                    </ul>
+                    
+                    <h3>Platform Integration</h3>
+                    <ul>
+                        <li><strong>Facebook:</strong> Conversions API (CAPI) - server-to-server</li>
+                        <li><strong>Google:</strong> Enhanced Conversions + Offline Conversions</li>
+                    </ul>
+                </section>
+                
+                <section id="automation" class="docs-section">
+                    <h2>Automation Rules</h2>
+                    <p>Automate common optimization tasks that marketers know they should do but rarely have time for.</p>
+                    
+                    <h3>Budget Scaling</h3>
+                    <p>Automatically increase budgets for high-performing campaigns:</p>
+                    <pre><code>IF ROAS > 3.0 for 5 days AND spend < $10,000
+THEN increase budget by 25% (cap at $15,000)</code></pre>
+                    
+                    <h3>Creative Testing</h3>
+                    <p>Automatically rotate new creatives and allocate budget to winners.</p>
+                    
+                    <h3>Audience Management</h3>
+                    <p>Suppress ads to converted users in real-time and expand lookalikes from high-LTV cohorts.</p>
+                </section>
+                
+                <section id="ltv-setup" class="docs-section">
+                    <h2>LTV Setup Guide</h2>
+                    <p>To optimize for LTV, you need to provide lifetime value data.</p>
+                    
+                    <h3>Option 1: Historical LTV</h3>
+                    <p>Upload historical customer data with purchase history and lifetime value.</p>
+                    
+                    <h3>Option 2: Predicted LTV</h3>
+                    <p>Use our built-in LTV prediction model or provide your own predictions via API.</p>
+                    
+                    <h3>Option 3: Simple LTV Proxy</h3>
+                    <p>If you don't have LTV data, we can use average order value × estimated repeat purchase rate as a proxy.</p>
+                </section>
+                
+                <section id="incrementality" class="docs-section">
+                    <h2>Incrementality Testing</h2>
+                    <p>Prove your optimization works with scientific A/B tests.</p>
+                    
+                    <h3>Campaign-Level Split</h3>
+                    <p>Randomly assign similar campaigns to control (platform automation) vs. treatment (Advera Labs).</p>
+                    
+                    <h3>Geo Holdout</h3>
+                    <p>Split regions into test vs. control geos to measure true incremental lift.</p>
+                    
+                    <h3>Statistical Power</h3>
+                    <p>We automatically calculate the minimum test duration needed for statistical significance based on your historical variance.</p>
+                </section>
+                
+                <section id="best-practices" class="docs-section">
+                    <h2>Best Practices</h2>
+                    
+                    <h3>Start Conservative</h3>
+                    <p>Begin with a 10-20% max change ratio and conservative optimization goals. Scale up as you see results.</p>
+                    
+                    <h3>Monitor for 3-5 Days</h3>
+                    <p>Give optimizations time to work before making major changes.</p>
+                    
+                    <h3>Fix Tracking First</h3>
+                    <p>Address ROI audit issues before enabling advanced optimization features.</p>
+                    
+                    <h3>Use Incrementality Tests</h3>
+                    <p>Run A/B tests to validate that optimizations are driving real incremental lift.</p>
+                </section>
+            </main>
+        </div>
+    </div>
+</section>
+
+<!-- Support CTA -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Need Help?</h2>
+            <p>Can't find what you're looking for? Our support team is here to help.</p>
+            <div class="cta-buttons">
+                <a href="{% url 'support' %}" class="btn-primary large">Visit Support</a>
+                <a href="{% url 'contact' %}" class="btn-secondary large">Contact Us</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.page-hero {
+    padding: 160px 0 80px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    text-align: center;
+}
+
+.page-hero h1 {
+    font-size: 56px;
+    font-weight: 800;
+    margin-bottom: 24px;
+}
+
+.hero-subtitle {
+    font-size: 24px;
+    opacity: 0.9;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.content-section {
+    padding: 80px 0;
+}
+
+.docs-layout {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 64px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.docs-sidebar {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+}
+
+.docs-nav {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+}
+
+.docs-nav h3 {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+    margin: 24px 0 12px;
+}
+
+.docs-nav h3:first-child {
+    margin-top: 0;
+}
+
+.docs-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 32px 0;
+}
+
+.docs-nav li {
+    margin-bottom: 8px;
+}
+
+.docs-nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+    display: block;
+    padding: 4px 0;
+}
+
+.docs-nav a:hover {
+    color: var(--primary);
+}
+
+.docs-content {
+    max-width: 800px;
+}
+
+.docs-section {
+    margin-bottom: 64px;
+    padding-bottom: 64px;
+    border-bottom: 1px solid var(--border);
+}
+
+.docs-section:last-child {
+    border-bottom: none;
+}
+
+.docs-section h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.docs-section h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 32px 0 16px;
+    color: var(--text-primary);
+}
+
+.docs-section p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+.docs-section ul,
+.docs-section ol {
+    margin: 16px 0;
+    padding-left: 24px;
+}
+
+.docs-section li {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.docs-section pre {
+    background: var(--bg-secondary);
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0;
+}
+
+.docs-section code {
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: var(--text-primary);
+}
+
+@media (max-width: 968px) {
+    .docs-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .docs-sidebar {
+        position: static;
+    }
+}
+</style>
+{% endblock %}
+

@@ -1,0 +1,623 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="page-hero">
+    <div class="container">
+        <h1>API Documentation</h1>
+        <p class="hero-subtitle">Integrate Advera Labs into your own systems with our RESTful API.</p>
+    </div>
+</section>
+
+<!-- API Overview -->
+<section class="content-section">
+    <div class="container">
+        <div class="api-intro">
+            <h2>Getting Started</h2>
+            <p>The Advera Labs API allows you to programmatically access optimization features, fetch performance data, and trigger budget allocations.</p>
+            
+            <div class="api-info-box">
+                <h3>Base URL</h3>
+                <code>https://api.adveralabs.com/v1</code>
+            </div>
+            
+            <div class="api-info-box">
+                <h3>Authentication</h3>
+                <p>All API requests require authentication using an API key. Include it in the Authorization header:</p>
+                <pre><code>Authorization: Bearer YOUR_API_KEY</code></pre>
+                <p>Get your API key from Settings → API Keys in your dashboard.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- API Endpoints -->
+<section class="content-section bg-secondary">
+    <div class="container">
+        <h2 class="section-title">API Endpoints</h2>
+        
+        <div class="api-endpoints">
+            <!-- Budget Allocation -->
+            <div class="api-endpoint">
+                <div class="endpoint-header">
+                    <span class="endpoint-method post">POST</span>
+                    <code class="endpoint-path">/optimization/allocate-budget</code>
+                </div>
+                <p class="endpoint-description">Allocate budget across campaigns/adsets using intelligent optimization.</p>
+                
+                <h4>Request Body</h4>
+                <pre><code>{
+  "arms": [
+    {
+      "platform": "facebook",
+      "id": "adset_123",
+      "spend": 1000.0,
+      "revenue": 3000.0,
+      "conversions": 50,
+      "ltv": 150.0,
+      "profit_margin": 0.3
+    }
+  ],
+  "total_budget": 2000.0,
+  "optimization_goal": "profit",
+  "strategy": "intelligent"
+}</code></pre>
+                
+                <h4>Response</h4>
+                <pre><code>{
+  "allocations": [
+    {
+      "arm_id": "adset_123",
+      "platform": "facebook",
+      "current_budget": 1000.0,
+      "new_budget": 1500.0,
+      "change_percentage": 50.0,
+      "score": 2.4,
+      "reason": "High profit ROAS, allocating more budget"
+    }
+  ],
+  "total_allocated": 2000.0,
+  "expected_improvement": {
+    "estimated_roas_improvement": "10-15%"
+  }
+}</code></pre>
+            </div>
+            
+            <!-- Fetch Arms -->
+            <div class="api-endpoint">
+                <div class="endpoint-header">
+                    <span class="endpoint-method get">GET</span>
+                    <code class="endpoint-path">/optimization/fetch-arms</code>
+                </div>
+                <p class="endpoint-description">Fetch normalized arm states (campaigns/adsets) from connected platforms.</p>
+                
+                <h4>Query Parameters</h4>
+                <ul>
+                    <li><code>facebook_account_id</code> (optional): Facebook ad account ID</li>
+                    <li><code>google_customer_id</code> (optional): Google Ads customer ID</li>
+                    <li><code>time_window</code> (optional): "yesterday", "last_7d", "last_30d" (default: "yesterday")</li>
+                </ul>
+                
+                <h4>Response</h4>
+                <pre><code>[
+  {
+    "platform": "facebook",
+    "id": "adset_123",
+    "campaign_name": "Summer Sale",
+    "spend": 1000.0,
+    "revenue": 3000.0,
+    "conversions": 50,
+    "roas": 3.0,
+    "ltv": 150.0,
+    "profit_margin": 0.3
+  }
+]</code></pre>
+            </div>
+            
+            <!-- ROI Audit -->
+            <div class="api-endpoint">
+                <div class="endpoint-header">
+                    <span class="endpoint-method post">POST</span>
+                    <code class="endpoint-path">/optimization/roi-audit</code>
+                </div>
+                <p class="endpoint-description">Perform ROI audit to detect tracking and configuration issues.</p>
+                
+                <h4>Request Body</h4>
+                <pre><code>{
+  "account_id": "account_123",
+  "arms": [...],
+  "optimization_goal": "roas",
+  "platform_configs": {
+    "facebook": {
+      "conversions_api_enabled": false
+    }
+  }
+}</code></pre>
+                
+                <h4>Response</h4>
+                <pre><code>{
+  "tracking_issues": [
+    {
+      "issue_type": "missing_conversions",
+      "severity": "critical",
+      "description": "Arm has spend but zero conversions",
+      "recommendation": "Check conversion tracking setup"
+    }
+  ],
+  "overall_health_score": 65,
+  "critical_issues_count": 2,
+  "recommendations": [
+    "Fix 2 critical issue(s) immediately"
+  ]
+}</code></pre>
+            </div>
+            
+            <!-- Signal Generation -->
+            <div class="api-endpoint">
+                <div class="endpoint-header">
+                    <span class="endpoint-method post">POST</span>
+                    <code class="endpoint-path">/signals/generate</code>
+                </div>
+                <p class="endpoint-description">Generate high-quality conversion signals from business events.</p>
+                
+                <h4>Request Body</h4>
+                <pre><code>{
+  "events": [
+    {
+      "event_type": "purchase",
+      "event_id": "purchase_001",
+      "user_id": "user_123",
+      "timestamp": "2025-01-31T12:00:00Z",
+      "revenue": 149.99,
+      "currency": "USD"
+    }
+  ],
+  "platform": "both",
+  "vertical": "ecommerce",
+  "ltv_data": [
+    {
+      "user_id": "user_123",
+      "predicted_ltv": 350.0
+    }
+  ]
+}</code></pre>
+                
+                <h4>Response</h4>
+                <pre><code>{
+  "signals": [
+    {
+      "platform": "facebook",
+      "event_name": "Purchase",
+      "event_id": "purchase_001_facebook",
+      "value": 149.99,
+      "classification": "high_value_purchase",
+      "reasoning": "Classified as high-value based on LTV prediction"
+    }
+  ],
+  "total_value": 149.99,
+  "issues_detected": []
+}</code></pre>
+            </div>
+            
+            <!-- Run Optimization -->
+            <div class="api-endpoint">
+                <div class="endpoint-header">
+                    <span class="endpoint-method post">POST</span>
+                    <code class="endpoint-path">/optimization/run</code>
+                </div>
+                <p class="endpoint-description">Run a complete optimization cycle (fetch data, allocate budget, apply changes).</p>
+                
+                <h4>Request Body</h4>
+                <pre><code>{
+  "account_id": "account_123",
+  "total_budget": 10000.0,
+  "facebook_account_id": "act_123456789",
+  "google_customer_id": "1234567890",
+  "time_window": "yesterday",
+  "optimization_goal": "profit"
+}</code></pre>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Code Examples -->
+<section class="content-section">
+    <div class="container">
+        <h2 class="section-title">Code Examples</h2>
+        
+        <div class="code-examples">
+            <div class="code-example">
+                <h3>Python</h3>
+                <pre><code>import requests
+
+API_KEY = "your_api_key_here"
+BASE_URL = "https://api.adveralabs.com/v1"
+
+headers = {
+    "Authorization": f"Bearer {API_KEY}",
+    "Content-Type": "application/json"
+}
+
+# Fetch arms
+response = requests.get(
+    f"{BASE_URL}/optimization/fetch-arms",
+    headers=headers,
+    params={"time_window": "last_7d"}
+)
+arms = response.json()
+
+# Allocate budget
+allocation_request = {
+    "arms": arms,
+    "total_budget": 5000.0,
+    "optimization_goal": "profit",
+    "strategy": "intelligent"
+}
+
+response = requests.post(
+    f"{BASE_URL}/optimization/allocate-budget",
+    headers=headers,
+    json=allocation_request
+)
+result = response.json()</code></pre>
+            </div>
+            
+            <div class="code-example">
+                <h3>JavaScript/Node.js</h3>
+                <pre><code>const axios = require('axios');
+
+const API_KEY = 'your_api_key_here';
+const BASE_URL = 'https://api.adveralabs.com/v1';
+
+const client = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    'Authorization': `Bearer ${API_KEY}`,
+    'Content-Type': 'application/json'
+  }
+});
+
+// Fetch arms
+const arms = await client.get('/optimization/fetch-arms', {
+  params: { time_window: 'last_7d' }
+});
+
+// Allocate budget
+const result = await client.post('/optimization/allocate-budget', {
+  arms: arms.data,
+  total_budget: 5000.0,
+  optimization_goal: 'profit',
+  strategy: 'intelligent'
+});</code></pre>
+            </div>
+            
+            <div class="code-example">
+                <h3>cURL</h3>
+                <pre><code># Fetch arms
+curl -X GET "https://api.adveralabs.com/v1/optimization/fetch-arms?time_window=last_7d" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+
+# Allocate budget
+curl -X POST "https://api.adveralabs.com/v1/optimization/allocate-budget" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "arms": [...],
+    "total_budget": 5000.0,
+    "optimization_goal": "profit"
+  }'</code></pre>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Rate Limits -->
+<section class="content-section bg-secondary">
+    <div class="container">
+        <h2 class="section-title">Rate Limits</h2>
+        <div class="rate-limits">
+            <div class="rate-limit-card">
+                <h3>Free Tier</h3>
+                <p><strong>100 requests/hour</strong></p>
+                <p>Perfect for testing and small integrations</p>
+            </div>
+            <div class="rate-limit-card">
+                <h3>Professional</h3>
+                <p><strong>1,000 requests/hour</strong></p>
+                <p>For production integrations</p>
+            </div>
+            <div class="rate-limit-card">
+                <h3>Enterprise</h3>
+                <p><strong>10,000+ requests/hour</strong></p>
+                <p>Custom limits based on your needs</p>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 32px; color: var(--text-secondary);">
+            Rate limit headers are included in all responses: <code>X-RateLimit-Limit</code>, <code>X-RateLimit-Remaining</code>, <code>X-RateLimit-Reset</code>
+        </p>
+    </div>
+</section>
+
+<!-- Error Handling -->
+<section class="content-section">
+    <div class="container">
+        <h2 class="section-title">Error Handling</h2>
+        <p>All errors follow a consistent format:</p>
+        
+        <pre><code>{
+  "error": {
+    "code": "INVALID_REQUEST",
+    "message": "Invalid optimization_goal. Must be one of: roas, profit, ltv, cpa",
+    "details": {
+      "field": "optimization_goal",
+      "provided": "revenue",
+      "allowed": ["roas", "profit", "ltv", "cpa"]
+    }
+  }
+}</code></pre>
+        
+        <h3>HTTP Status Codes</h3>
+        <ul>
+            <li><strong>200:</strong> Success</li>
+            <li><strong>400:</strong> Bad Request - Invalid parameters</li>
+            <li><strong>401:</strong> Unauthorized - Invalid or missing API key</li>
+            <li><strong>403:</strong> Forbidden - Insufficient permissions</li>
+            <li><strong>404:</strong> Not Found - Resource doesn't exist</li>
+            <li><strong>429:</strong> Too Many Requests - Rate limit exceeded</li>
+            <li><strong>500:</strong> Internal Server Error</li>
+        </ul>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Ready to Integrate?</h2>
+            <p>Get your API key from your dashboard and start building.</p>
+            <div class="cta-buttons">
+                <a href="{% url 'home' %}#demo" class="btn-primary large">Get API Key</a>
+                <a href="{% url 'contact' %}" class="btn-secondary large">Contact Sales</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.page-hero {
+    padding: 160px 0 80px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    text-align: center;
+}
+
+.page-hero h1 {
+    font-size: 56px;
+    font-weight: 800;
+    margin-bottom: 24px;
+}
+
+.hero-subtitle {
+    font-size: 24px;
+    opacity: 0.9;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.content-section {
+    padding: 80px 0;
+}
+
+.content-section.bg-secondary {
+    background: var(--bg-secondary);
+}
+
+.api-intro {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.api-intro h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--text-primary);
+}
+
+.api-intro p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 32px;
+}
+
+.api-info-box {
+    background: var(--bg-secondary);
+    padding: 24px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+}
+
+.api-info-box h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.api-info-box code {
+    background: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: var(--text-primary);
+    display: inline-block;
+    margin: 8px 0;
+}
+
+.api-info-box pre {
+    background: white;
+    padding: 16px;
+    border-radius: 8px;
+    margin: 12px 0;
+    overflow-x: auto;
+}
+
+.api-endpoints {
+    max-width: 1000px;
+    margin: 48px auto 0;
+}
+
+.api-endpoint {
+    background: white;
+    padding: 32px;
+    border-radius: 12px;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow-md);
+}
+
+.endpoint-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.endpoint-method {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.endpoint-method.get {
+    background: #10B981;
+    color: white;
+}
+
+.endpoint-method.post {
+    background: var(--primary);
+    color: white;
+}
+
+.endpoint-path {
+    font-family: 'Courier New', monospace;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.endpoint-description {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+}
+
+.api-endpoint h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 24px 0 12px;
+    color: var(--text-primary);
+}
+
+.api-endpoint pre {
+    background: var(--bg-secondary);
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 12px 0;
+}
+
+.api-endpoint code {
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: var(--text-primary);
+}
+
+.api-endpoint ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 12px 0;
+}
+
+.api-endpoint li {
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: var(--text-secondary);
+}
+
+.code-examples {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 32px;
+    margin-top: 48px;
+}
+
+.code-example {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+}
+
+.code-example h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.code-example pre {
+    background: var(--bg-secondary);
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+.rate-limits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+    margin-top: 48px;
+}
+
+.rate-limit-card {
+    background: white;
+    padding: 32px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+}
+
+.rate-limit-card h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.rate-limit-card p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.rate-limit-card p strong {
+    font-size: 20px;
+    color: var(--primary);
+}
+
+@media (max-width: 768px) {
+    .code-examples {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+{% endblock %}
+

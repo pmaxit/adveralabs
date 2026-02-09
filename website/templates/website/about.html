@@ -1,0 +1,311 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="page-hero">
+    <div class="container">
+        <h1>About Advera Labs</h1>
+        <p class="hero-subtitle">We're building the future of ad optimization—one that optimizes for profit, not just clicks.</p>
+    </div>
+</section>
+
+<!-- Mission Section -->
+<section class="content-section">
+    <div class="container">
+        <div class="content-grid">
+            <div class="content-text">
+                <h2>Our Mission</h2>
+                <p>Advera Labs was founded on a simple observation: ad platforms optimize for what you tell them to optimize for, not what actually matters to your business.</p>
+                <p>While Meta and Google have sophisticated Smart Bidding algorithms, they're limited by:</p>
+                <ul>
+                    <li>On-platform behavior data only</li>
+                    <li>Last-click attribution models</li>
+                    <li>Optimization goals you configure (which are often wrong)</li>
+                    <li>No cross-platform coordination</li>
+                </ul>
+                <p>We built Advera Labs to bridge this gap—feeding platforms better signals, optimizing at the business level, and coordinating budgets across channels for maximum profit.</p>
+            </div>
+            <div class="content-visual">
+                <div class="stat-box">
+                    <div class="stat-number">2024</div>
+                    <div class="stat-label">Founded</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Customers</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">$10M+</div>
+                    <div class="stat-label">Ad Spend Optimized</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="content-section bg-secondary">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Our Team</h2>
+            <p class="section-subtitle">Built by performance marketers, for performance marketers.</p>
+        </div>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-avatar">SC</div>
+                <h3>Sarah Chen</h3>
+                <p class="member-role">Co-Founder & CEO</p>
+                <p class="member-bio">Former Head of Growth at a $100M DTC brand. 10+ years optimizing ad spend across Meta and Google.</p>
+            </div>
+            <div class="team-member">
+                <div class="member-avatar">MP</div>
+                <h3>Michael Park</h3>
+                <p class="member-role">Co-Founder & CTO</p>
+                <p class="member-bio">Ex-Google Ads engineer. Built optimization systems handling $1B+ in ad spend.</p>
+            </div>
+            <div class="team-member">
+                <div class="member-avatar">DK</div>
+                <h3>David Kim</h3>
+                <p class="member-role">Head of Product</p>
+                <p class="member-bio">Former product lead at a leading ad tech platform. Deep expertise in ML and optimization algorithms.</p>
+            </div>
+            <div class="team-member">
+                <div class="member-avatar">ER</div>
+                <h3>Emily Rodriguez</h3>
+                <p class="member-role">Head of Customer Success</p>
+                <p class="member-bio">15+ years helping agencies and brands maximize ROI from their ad spend.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Values Section -->
+<section class="content-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Our Values</h2>
+        </div>
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">🎯</div>
+                <h3>Business-First</h3>
+                <p>We optimize for what matters: profit, LTV, and sustainable growth—not vanity metrics.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🔬</div>
+                <h3>Science-Driven</h3>
+                <p>Every optimization decision is backed by data, experimentation, and statistical rigor.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🤝</div>
+                <h3>Customer-Centric</h3>
+                <p>We build features our customers actually need, not what we think is cool.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">⚡</div>
+                <h3>Fast & Transparent</h3>
+                <p>1-hour setup. Clear pricing. No hidden fees. Results you can measure.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Join Us in Building the Future of Ad Optimization</h2>
+            <p>We're hiring! Check out our <a href="{% url 'careers' %}" style="color: white; text-decoration: underline;">open positions</a> or <a href="{% url 'contact' %}" style="color: white; text-decoration: underline;">get in touch</a>.</p>
+            <div class="cta-buttons">
+                <a href="{% url 'careers' %}" class="btn-primary large">View Careers</a>
+                <a href="{% url 'contact' %}" class="btn-secondary large">Contact Us</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.page-hero {
+    padding: 160px 0 80px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    text-align: center;
+}
+
+.page-hero h1 {
+    font-size: 56px;
+    font-weight: 800;
+    margin-bottom: 24px;
+}
+
+.hero-subtitle {
+    font-size: 24px;
+    opacity: 0.9;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.content-section {
+    padding: 80px 0;
+}
+
+.content-section.bg-secondary {
+    background: var(--bg-secondary);
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+}
+
+.content-text h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--text-primary);
+}
+
+.content-text p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+.content-text ul {
+    margin: 24px 0;
+    padding-left: 24px;
+}
+
+.content-text li {
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.content-visual {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.stat-box {
+    background: white;
+    padding: 32px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+}
+
+.stat-number {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    font-size: 16px;
+    color: var(--text-secondary);
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 32px;
+    margin-top: 48px;
+}
+
+.team-member {
+    background: white;
+    padding: 32px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+}
+
+.member-avatar {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 auto 16px;
+}
+
+.team-member h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.member-role {
+    font-size: 16px;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.member-bio {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 32px;
+    margin-top: 48px;
+}
+
+.value-card {
+    background: white;
+    padding: 32px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    text-align: center;
+}
+
+.value-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.value-card h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.value-card p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .page-hero h1 {
+        font-size: 36px;
+    }
+}
+</style>
+{% endblock %}
+

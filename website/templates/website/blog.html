@@ -1,0 +1,258 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="page-hero">
+    <div class="container">
+        <h1>Blog</h1>
+        <p class="hero-subtitle">Insights, strategies, and best practices for ad optimization and performance marketing.</p>
+    </div>
+</section>
+
+<!-- Blog Posts -->
+<section class="content-section">
+    <div class="container">
+        <div class="blog-grid">
+            {% for post in blog_posts %}
+            <article class="blog-card">
+                <div class="blog-card-image">
+                    <div class="image-placeholder">
+                        <span>{{ post.category|first }}</span>
+                    </div>
+                </div>
+                <div class="blog-card-content">
+                    <div class="blog-meta">
+                        <span class="blog-category">{{ post.category }}</span>
+                        <span class="blog-date">{{ post.date }}</span>
+                        <span class="blog-read-time">{{ post.read_time }}</span>
+                    </div>
+                    <h2 class="blog-title">
+                        <a href="{% url 'blog_post' post.id %}">{{ post.title }}</a>
+                    </h2>
+                    <p class="blog-excerpt">{{ post.excerpt }}</p>
+                    <div class="blog-author">
+                        <div class="author-avatar-small">{{ post.author|first }}{{ post.author|slice:"1:2" }}</div>
+                        <div class="author-info-small">
+                            <div class="author-name-small">{{ post.author }}</div>
+                        </div>
+                    </div>
+                    <a href="{% url 'blog_post' post.id %}" class="blog-read-more">Read More →</a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter CTA -->
+<section class="newsletter-section">
+    <div class="container">
+        <div class="newsletter-content">
+            <h2>Stay Updated</h2>
+            <p>Get the latest insights on ad optimization delivered to your inbox.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit" class="btn-primary">Subscribe</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.page-hero {
+    padding: 160px 0 80px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    text-align: center;
+}
+
+.page-hero h1 {
+    font-size: 56px;
+    font-weight: 800;
+    margin-bottom: 24px;
+}
+
+.hero-subtitle {
+    font-size: 24px;
+    opacity: 0.9;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.content-section {
+    padding: 80px 0;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 32px;
+}
+
+.blog-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.blog-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.blog-card-image {
+    height: 200px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-placeholder {
+    color: white;
+    font-size: 64px;
+    font-weight: 700;
+    opacity: 0.3;
+}
+
+.blog-card-content {
+    padding: 24px;
+}
+
+.blog-meta {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.blog-category {
+    background: var(--bg-secondary);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.blog-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.blog-title a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.blog-title a:hover {
+    color: var(--primary);
+}
+
+.blog-excerpt {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.blog-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.author-avatar-small {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.author-name-small {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 14px;
+}
+
+.blog-read-more {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.blog-read-more:hover {
+    color: var(--secondary);
+}
+
+.newsletter-section {
+    padding: 80px 0;
+    background: var(--bg-secondary);
+}
+
+.newsletter-content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.newsletter-content h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.newsletter-content p {
+    font-size: 18px;
+    color: var(--text-secondary);
+    margin-bottom: 32px;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 12px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 16px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.newsletter-form input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+@media (max-width: 768px) {
+    .blog-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+    }
+}
+</style>
+{% endblock %}
+

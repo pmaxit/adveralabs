@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advera Labs - AI-Powered Cross-Channel Ad Optimization</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <rect width="32" height="32" rx="6" fill="url(#gradient)"/>
+                        <path d="M16 8L22 14H18V20H14V14H10L16 8Z" fill="white"/>
+                        <defs>
+                            <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#6366F1"/>
+                                <stop offset="1" stop-color="#8B5CF6"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span class="logo-text">Advera Labs</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#comparison">Why Us</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#contact" class="btn-secondary">Contact</a></li>
+                    <li><a href="#demo" class="btn-primary">Get Started</a></li>
+                </ul>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="badge">AI-Powered Optimization</div>
+                    <h1 class="hero-title">
+                        Optimize Ad Spend Across <span class="gradient-text">Facebook & Google</span> 
+                        for Maximum Profit
+                    </h1>
+                    <p class="hero-description">
+                        Stop optimizing for clicks. Start optimizing for profit. Our AI orchestrates 
+                        budgets across platforms using LTV, margins, and business outcomes—not just ROAS.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#demo" class="btn-primary large">Start Free Trial</a>
+                        <a href="#demo" class="btn-secondary large">Watch Demo</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-value">10-20%</div>
+                            <div class="stat-label">Wasted Spend Recovered</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">1 Hour</div>
+                            <div class="stat-label">Setup Time</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">$100K+</div>
+                            <div class="stat-label">Monthly Ad Spend</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="dashboard-preview">
+                        <div class="dashboard-header">
+                            <div class="dashboard-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <span class="dashboard-title">Ad Optimization Dashboard</span>
+                        </div>
+                        <div class="dashboard-content">
+                            <div class="metric-card">
+                                <div class="metric-label">Total ROAS</div>
+                                <div class="metric-value">4.2x</div>
+                                <div class="metric-change positive">+18% vs baseline</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Profit/Day</div>
+                                <div class="metric-value">$12.4K</div>
+                                <div class="metric-change positive">+24% vs baseline</div>
+                            </div>
+                            <div class="chart-placeholder">
+                                <div class="chart-bars">
+                                    <div class="bar" style="height: 60%"></div>
+                                    <div class="bar" style="height: 85%"></div>
+                                    <div class="bar" style="height: 70%"></div>
+                                    <div class="bar" style="height: 95%"></div>
+                                    <div class="bar" style="height: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem-section">
+        <div class="container">
+            <h2 class="section-title">The Problem with Current Ad Optimization</h2>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">⚠️</div>
+                    <h3>Platforms Only See Last-Click</h3>
+                    <p>Meta and Google optimize based on on-platform behavior, missing true business outcomes like LTV and profit margins.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">📉</div>
+                    <h3>Misconfigured Conversions</h3>
+                    <p>Smart Bidding breaks when tracking is messy, goals are wrong, or conversion volume is low—costing you 10-20% in wasted spend.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">🔄</div>
+                    <h3>No Cross-Channel Coordination</h3>
+                    <p>Each platform optimizes independently. No unified view of profit per day across Facebook and Google.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">⏱️</div>
+                    <h3>Manual Budget Shifts</h3>
+                    <p>Marketers waste hours on tedious ops: budget shifts, testing, negative signals—tasks that should be automated.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution-section" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">The Advera Labs Solution</h2>
+                <p class="section-subtitle">A cross-channel performance layer that wraps Meta and Google with better data, better objectives, and smarter automation.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+                            <path d="M2 17L12 22L22 17"/>
+                            <path d="M2 12L12 17L22 12"/>
+                        </svg>
+                    </div>
+                    <h3>Smart Signal Generation</h3>
+                    <p>Feed platforms higher-quality conversion signals (LTV, profit, qualified leads) via CAPI and Enhanced Conversions. Unlock the full potential of Smart Bidding.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 3H21V21H3V3Z"/>
+                            <path d="M9 9H15V15H9V9Z"/>
+                        </svg>
+                    </div>
+                    <h3>Business-Level Optimization</h3>
+                    <p>Optimize for profit, LTV, and margins—not just per-platform ROAS. Make unified decisions across Facebook and Google.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+                            <path d="M2 17L12 22L22 17"/>
+                            <path d="M2 12L12 17L22 12"/>
+                        </svg>
+                    </div>
+                    <h3>Cross-Channel Budget Brain</h3>
+                    <p>AI-powered budget allocation using multi-armed bandit algorithms. Automatically shifts budget from underperformers to winners across platforms.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6V12L16 14"/>
+                        </svg>
+                    </div>
+                    <h3>Automation Engine</h3>
+                    <p>Automated budget scaling, creative testing, audience suppression, and cross-channel experiments. Set it and forget it.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 11L12 14L22 4"/>
+                            <path d="M21 12V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H16"/>
+                        </svg>
+                    </div>
+                    <h3>ROI Audit</h3>
+                    <p>Instant detection of tracking issues, misconfigured conversions, and broken pixels. Get actionable recommendations to fix problems.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+                            <path d="M2 17L12 22L22 17"/>
+                            <path d="M2 12L12 17L22 12"/>
+                        </svg>
+                    </div>
+                    <h3>Built-in Incrementality Testing</h3>
+                    <p>Prove your optimization works with scientific A/B tests and geo holdouts. Show real incremental lift, not just nicer dashboards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">Get started in 1 hour. See results in days.</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Connect Your Accounts</h3>
+                        <p>Connect Facebook Ads and Google Ads accounts. We auto-detect your current goals, KPIs, and tracking setup.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>ROI Audit & Quick Wins</h3>
+                        <p>Our AI instantly identifies tracking issues, misconfigured conversions, and broken pixels. Fix them to unlock 10-20% wasted spend.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Enable Optimization</h3>
+                        <p>Turn on automated budget shifts, creative rotation, and cross-channel coordination. Watch as budgets flow to winners.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Measure & Scale</h3>
+                        <p>Built-in incrementality tests prove your lift. Move to autopilot mode with full daily reallocation and guardrails.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison-section" id="comparison">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why Advera Labs vs. Competitors</h2>
+                <p class="section-subtitle">We don't just report—we optimize at the business level.</p>
+            </div>
+            <div class="comparison-table">
+                <div class="comparison-header">
+                    <div class="comparison-feature">Feature</div>
+                    <div class="comparison-competitor">Revealbot</div>
+                    <div class="comparison-competitor">BudgetFlow AI</div>
+                    <div class="comparison-competitor">Keen</div>
+                    <div class="comparison-us">Advera Labs</div>
+                </div>
+                <div class="comparison-row" data-label="LTV-Based Optimization">
+                    <div class="comparison-feature">LTV-Based Optimization</div>
+                    <div class="comparison-competitor" data-platform="Revealbot">❌</div>
+                    <div class="comparison-competitor" data-platform="BudgetFlow AI">❌</div>
+                    <div class="comparison-competitor" data-platform="Keen">❌</div>
+                    <div class="comparison-us">✅</div>
+                </div>
+                <div class="comparison-row" data-label="Profit-Based Budget Allocation">
+                    <div class="comparison-feature">Profit-Based Budget Allocation</div>
+                    <div class="comparison-competitor" data-platform="Revealbot">❌</div>
+                    <div class="comparison-competitor" data-platform="BudgetFlow AI">❌</div>
+                    <div class="comparison-competitor" data-platform="Keen">❌</div>
+                    <div class="comparison-us">✅</div>
+                </div>
+                <div class="comparison-row" data-label="Smart Signal Generation">
+                    <div class="comparison-feature">Smart Signal Generation (CAPI/Enhanced)</div>
+                    <div class="comparison-competitor" data-platform="Revealbot">❌</div>
+                    <div class="comparison-competitor" data-platform="BudgetFlow AI">❌</div>
+                    <div class="comparison-competitor" data-platform="Keen">❌</div>
+                    <div class="comparison-us">✅</div>
+                </div>
+                <div class="comparison-row" data-label="ROI Audit & Issue Detection">
+                    <div class="comparison-feature">ROI Audit & Issue Detection</div>
+                    <div class="comparison-competitor" data-platform="Revealbot">❌</div>
+                    <div class="comparison-competitor" data-platform="BudgetFlow AI">❌</div>
+                    <div class="comparison-competitor" data-platform="Keen">❌</div>
+                    <div class="comparison-us">✅</div>
+                </div>
+                <div class="comparison-row" data-label="Built-in Incrementality Testing">
+                    <div class="comparison-feature">Built-in Incrementality Testing</div>
+                    <div class="comparison-competitor" data-platform="Revealbot">❌</div>
+                    <div class="comparison-competitor" data-platform="BudgetFlow AI">❌</div>
+                    <div class="comparison-competitor" data-platform="Keen">Partial</div>
+                    <div class="comparison-us">✅</div>
+                </div>
+                <div class="comparison-row" data-label="Cross-Channel Unified Objectives">
+                    <div class="comparison-feature">Cross-Channel Unified Objectives</div>
+                    <div class="comparison-competitor" data-platform="Revealbot">❌</div>
+                    <div class="comparison-competitor" data-platform="BudgetFlow AI">Partial</div>
+                    <div class="comparison-competitor" data-platform="Keen">Partial</div>
+                    <div class="comparison-us">✅</div>
+                </div>
+                <div class="comparison-row" data-label="1-Hour Setup">
+                    <div class="comparison-feature">1-Hour Setup</div>
+                    <div class="comparison-competitor" data-platform="Revealbot">❌</div>
+                    <div class="comparison-competitor" data-platform="BudgetFlow AI">❌</div>
+                    <div class="comparison-competitor" data-platform="Keen">❌</div>
+                    <div class="comparison-us">✅</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Calculator -->
+    <section class="roi-calculator">
+        <div class="container">
+            <div class="calculator-content">
+                <div class="calculator-text">
+                    <h2>Calculate Your Potential Savings</h2>
+                    <p>See how much wasted spend you could recover with Advera Labs.</p>
+                </div>
+                <div class="calculator-form">
+                    <div class="form-group">
+                        <label>Monthly Ad Spend</label>
+                        <input type="number" id="monthly-spend" value="100000" min="10000" step="10000">
+                    </div>
+                    <div class="form-group">
+                        <label>Current ROAS</label>
+                        <input type="number" id="current-roas" value="3.0" min="1" step="0.1">
+                    </div>
+                    <div class="calculator-result">
+                        <div class="result-label">Potential Monthly Savings</div>
+                        <div class="result-value" id="savings">$15,000</div>
+                        <div class="result-note">Based on 10-20% wasted spend recovery</div>
+                    </div>
+                    <button class="btn-primary large" onclick="calculateROI()">Recalculate</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Integrations -->
+    <section class="integrations">
+        <div class="container">
+            <div class="integrations-title">Integrates Seamlessly With</div>
+            <div class="integration-logos">
+                <div class="integration-logo">
+                    <svg width="120" height="40" viewBox="0 0 120 40" fill="none">
+                        <rect width="120" height="40" rx="4" fill="#1877F2"/>
+                        <text x="60" y="25" text-anchor="middle" fill="white" font-size="14" font-weight="600">Facebook Ads</text>
+                    </svg>
+                </div>
+                <div class="integration-logo">
+                    <svg width="120" height="40" viewBox="0 0 120 40" fill="none">
+                        <rect width="120" height="40" rx="4" fill="#4285F4"/>
+                        <text x="60" y="25" text-anchor="middle" fill="white" font-size="14" font-weight="600">Google Ads</text>
+                    </svg>
+                </div>
+                <div class="integration-logo">
+                    <svg width="120" height="40" viewBox="0 0 120 40" fill="none">
+                        <rect width="120" height="40" rx="4" fill="#FF6B6B"/>
+                        <text x="60" y="25" text-anchor="middle" fill="white" font-size="14" font-weight="600">Shopify</text>
+                    </svg>
+                </div>
+                <div class="integration-logo">
+                    <svg width="120" height="40" viewBox="0 0 120 40" fill="none">
+                        <rect width="120" height="40" rx="4" fill="#00D9FF"/>
+                        <text x="60" y="25" text-anchor="middle" fill="white" font-size="14" font-weight="600">Segment</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="social-proof">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Trusted by Performance Marketers</h2>
+            </div>
+            <div class="testimonials">
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"Advera Labs recovered 18% of our wasted spend in the first month. The ROI audit alone was worth it."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JD</div>
+                        <div class="author-info">
+                            <div class="author-name">Jane Doe</div>
+                            <div class="author-role">VP Marketing, E-commerce Brand</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"Finally, a tool that optimizes for profit, not just ROAS. Our margins improved by 12% while maintaining revenue."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JS</div>
+                        <div class="author-info">
+                            <div class="author-name">John Smith</div>
+                            <div class="author-role">Performance Director, Agency</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"The cross-channel coordination is a game-changer. We're making unified decisions across Facebook and Google for the first time."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MJ</div>
+                        <div class="author-info">
+                            <div class="author-name">Maria Johnson</div>
+                            <div class="author-role">Head of Growth, SaaS Company</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Simple, Transparent Pricing</h2>
+                <p class="section-subtitle">Pay for value, not complexity.</p>
+            </div>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Starter</h3>
+                        <div class="pricing-price">
+                            <span class="price-amount">$499</span>
+                            <span class="price-period">/month</span>
+                        </div>
+                        <p class="pricing-description">For brands spending $30K-$50K/month</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>✅ Cross-channel optimization</li>
+                        <li>✅ ROI audit & recommendations</li>
+                        <li>✅ Smart signal generation</li>
+                        <li>✅ Automated budget allocation</li>
+                        <li>✅ Email support</li>
+                    </ul>
+                    <a href="#demo" class="btn-secondary">Get Started</a>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Most Popular</div>
+                    <div class="pricing-header">
+                        <h3>Professional</h3>
+                        <div class="pricing-price">
+                            <span class="price-amount">$1,499</span>
+                            <span class="price-period">/month</span>
+                        </div>
+                        <p class="pricing-description">For brands spending $50K-$200K/month</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>✅ Everything in Starter</li>
+                        <li>✅ LTV & profit optimization</li>
+                        <li>✅ Built-in incrementality testing</li>
+                        <li>✅ Advanced automation rules</li>
+                        <li>✅ Priority support</li>
+                        <li>✅ Custom models</li>
+                    </ul>
+                    <a href="#demo" class="btn-primary">Get Started</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Enterprise</h3>
+                        <div class="pricing-price">
+                            <span class="price-amount">Custom</span>
+                        </div>
+                        <p class="pricing-description">For brands spending $200K+/month</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>✅ Everything in Professional</li>
+                        <li>✅ Managed service tier</li>
+                        <li>✅ Dedicated account manager</li>
+                        <li>✅ Custom integrations</li>
+                        <li>✅ SLA guarantees</li>
+                        <li>✅ Performance-based pricing</li>
+                    </ul>
+                    <a href="#contact" class="btn-secondary">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="demo">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Recover 10-20% of Your Wasted Ad Spend?</h2>
+                <p>Start your free 14-day trial. No credit card required. Setup in 1 hour.</p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn-primary large">Start Free Trial</a>
+                    <a href="#contact" class="btn-secondary large">Schedule Demo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <rect width="32" height="32" rx="6" fill="url(#gradient)"/>
+                            <path d="M16 8L22 14H18V20H14V14H10L16 8Z" fill="white"/>
+                            <defs>
+                                <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#6366F1"/>
+                                    <stop offset="1" stop-color="#8B5CF6"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span class="logo-text">Advera Labs</span>
+                    </div>
+                    <p>AI-powered cross-channel ad optimization for maximum profit.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#comparison">Why Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#docs">Documentation</a></li>
+                        <li><a href="#api">API</a></li>
+                        <li><a href="#support">Support</a></li>
+                        <li><a href="#privacy">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Advera Labs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
